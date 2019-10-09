@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>openproject Database</title>
+        <!-- Tell the browser to be responsive to screen width -->
+        <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+        <link rel="icon" type="image/png" sizes="16x16" href="favicon.png">
+        <!-- Bootstrap 3.3.5 -->
+        <link rel="stylesheet" href="bower/admin-lte/bootstrap/css/bootstrap.min.css">
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="bower/font-awesome/css/font-awesome.min.css">
+        <!-- Ionicons -->
+        <link rel="stylesheet" href="bower/ionicons/css/ionicons.min.css">
+        <!-- DataTables -->
+        <link rel="stylesheet" href="bower/datatables.net-bs/css/dataTables.bootstrap.min.css">
+        <link rel="stylesheet" href="bower/datatables.net-buttons-bs/css/buttons.bootstrap.min.css">
+        <!-- Code Mirror -->
+        <link rel="stylesheet" href="bower/codemirror/codemirror.css">
+        <!-- Fonts -->
+        <link href='fonts/indieflower/indie-flower.css' rel='stylesheet' type='text/css'>
+        <link href='fonts/source-sans-pro/source-sans-pro.css' rel='stylesheet' type='text/css'>
+
+        <!-- Theme style -->
+        <link rel="stylesheet" href="bower/admin-lte/dist/css/AdminLTE.min.css">
+        <!-- Salvattore -->
+        <link rel="stylesheet" href="bower/salvattore/salvattore.css">
+        <!-- AdminLTE Skins. Choose a skin from the css/skins
+           folder instead of downloading all of them to reduce the load. -->
+        <link rel="stylesheet" href="bower/admin-lte/dist/css/skins/_all-skins.min.css">
+        <!-- SchemaSpy -->
+        <link rel="stylesheet" href="schemaSpy.css">
+
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+        <script src="bower/html5shiv/html5shiv.min.js"></script>
+        <script src="bower/respond/respond.min.js"></script>
+        <![endif]-->
+    </head>
+    <!-- ADD THE CLASS layout-top-nav TO REMOVE THE SIDEBAR. -->
+    <body class="hold-transition skin-blue layout-top-nav">
+        <div class="wrapper">
+            <header class="main-header">
+                <nav class="navbar navbar-static-top">
+                    <div class="container">
+                        <div class="navbar-header">
+                            <a href="index.html" class="navbar-brand"><b>openproject</b> Database</a>
+                            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse"><i class="fa fa-bars"></i></button>
+                        </div>
+
+                        <!-- Collect the nav links, forms, and other content for toggling -->
+                        <div class="collapse navbar-collapse pull-left" id="navbar-collapse">
+                            <ul class="nav navbar-nav">
+                                <li><a href="index.html">Tables <span class="sr-only">(current)</span></a></li>
+                                <li><a href="columns.html" title="All of the columns in the schema">Columns</a></li>
+                                <li><a href="constraints.html" title="Useful for diagnosing error messages that just give constraint name or number">Constraints</a></li>
+                                <li><a href="relationships.html" title="Diagram of table relationships">Relationships</a></li>
+                                <li><a href="orphans.html" title="View of tables with neither parents nor children">Orphan&nbsp;Tables</a></li>
+                                <li><a href="anomalies.html" title="Things that might not be quite right">Anomalies</a></li>
+                                <li><a href="routines.html" title="Procedures and functions">Routines</a></li>
+                            </ul>
+                        </div>
+                        <!-- /.navbar-collapse -->
+                        <!-- Navbar Right Menu -->
+                    </div>
+                    <!-- /.container-fluid -->
+                </nav>
+            </header>
+            <!-- Main content -->
+            <!-- Full Width Column -->
+            <div class="content-wrapper">
+                <!-- Content Header (Page header) -->
+                <section class="content-header">
+                    <h1>Utility Tables</h1>
+                </section>
+                <!-- Main content -->
+                <section class="content">
+                    <div class="box box-primary">
+                        <div class="box-header with-border">
+                            <i class="fa fa-code-fork"></i>
+                            <h3 class="box-title">Orphan Tables</h3>
+                        </div>
+                        <div class="box-body">
+                            <div id="grid" data-columns>
+                                <div class="item">
+                                    <img id="schema_migrationsDegreeImg" src="diagrams/orphans/schema_migrations.1degree.png" usemap="#schema_migrations" style="max-width:100%;" border="0" align="top">
+                                </div>
+                                <div class="item">
+                                    <img id="changesets_work_packagesDegreeImg" src="diagrams/orphans/changesets_work_packages.1degree.png" usemap="#changesets_work_packages" style="max-width:100%;" border="0" align="top">
+                                </div>
+                                <div class="item">
+                                    <img id="custom_fields_projectsDegreeImg" src="diagrams/orphans/custom_fields_projects.1degree.png" usemap="#custom_fields_projects" style="max-width:100%;" border="0" align="top">
+                                </div>
+                                <div class="item">
+                                    <img id="custom_fields_typesDegreeImg" src="diagrams/orphans/custom_fields_types.1degree.png" usemap="#custom_fields_types" style="max-width:100%;" border="0" align="top">
+                                </div>
+                                <div class="item">
+                                    <img id="done_statuses_for_projectDegreeImg" src="diagrams/orphans/done_statuses_for_project.1degree.png" usemap="#done_statuses_for_project" style="max-width:100%;" border="0" align="top">
+                                </div>
+                                <div class="item">
+                                    <img id="group_usersDegreeImg" src="diagrams/orphans/group_users.1degree.png" usemap="#group_users" style="max-width:100%;" border="0" align="top">
+                                </div>
+                                <div class="item">
+                                    <img id="projects_typesDegreeImg" src="diagrams/orphans/projects_types.1degree.png" usemap="#projects_types" style="max-width:100%;" border="0" align="top">
+                                </div>
+                                <div class="item">
+                                    <img id="custom_actions_projectsDegreeImg" src="diagrams/orphans/custom_actions_projects.1degree.png" usemap="#custom_actions_projects" style="max-width:100%;" border="0" align="top">
+                                </div>
+                                <div class="item">
+                                    <img id="custom_actions_rolesDegreeImg" src="diagrams/orphans/custom_actions_roles.1degree.png" usemap="#custom_actions_roles" style="max-width:100%;" border="0" align="top">
+                                </div>
+                                <div class="item">
+                                    <img id="custom_actions_statusesDegreeImg" src="diagrams/orphans/custom_actions_statuses.1degree.png" usemap="#custom_actions_statuses" style="max-width:100%;" border="0" align="top">
+                                </div>
+                                <div class="item">
+                                    <img id="custom_actions_typesDegreeImg" src="diagrams/orphans/custom_actions_types.1degree.png" usemap="#custom_actions_types" style="max-width:100%;" border="0" align="top">
+                                </div>
+                                <div class="item">
+                                    <img id="enabled_modulesDegreeImg" src="diagrams/orphans/enabled_modules.1degree.png" usemap="#enabled_modules" style="max-width:100%;" border="0" align="top">
+                                </div>
+                                <div class="item">
+                                    <img id="ar_internal_metadataDegreeImg" src="diagrams/orphans/ar_internal_metadata.1degree.png" usemap="#ar_internal_metadata" style="max-width:100%;" border="0" align="top">
+                                </div>
+                                <div class="item">
+                                    <img id="attachable_journalsDegreeImg" src="diagrams/orphans/attachable_journals.1degree.png" usemap="#attachable_journals" style="max-width:100%;" border="0" align="top">
+                                </div>
+                                <div class="item">
+                                    <img id="customizable_journalsDegreeImg" src="diagrams/orphans/customizable_journals.1degree.png" usemap="#customizable_journals" style="max-width:100%;" border="0" align="top">
+                                </div>
+                                <div class="item">
+                                    <img id="databasechangeloglockDegreeImg" src="diagrams/orphans/databasechangeloglock.1degree.png" usemap="#databasechangeloglock" style="max-width:100%;" border="0" align="top">
+                                </div>
+                                <div class="item">
+                                    <img id="enterprise_tokensDegreeImg" src="diagrams/orphans/enterprise_tokens.1degree.png" usemap="#enterprise_tokens" style="max-width:100%;" border="0" align="top">
+                                </div>
+                                <div class="item">
+                                    <img id="member_rolesDegreeImg" src="diagrams/orphans/member_roles.1degree.png" usemap="#member_roles" style="max-width:100%;" border="0" align="top">
+                                </div>
+                                <div class="item">
+                                    <img id="settingsDegreeImg" src="diagrams/orphans/settings.1degree.png" usemap="#settings" style="max-width:100%;" border="0" align="top">
+                                </div>
+                                <div class="item">
+                                    <img id="watchersDegreeImg" src="diagrams/orphans/watchers.1degree.png" usemap="#watchers" style="max-width:100%;" border="0" align="top">
+                                </div>
+                                <div class="item">
+                                    <img id="colorsDegreeImg" src="diagrams/orphans/colors.1degree.png" usemap="#colors" style="max-width:100%;" border="0" align="top">
+                                </div>
+                                <div class="item">
+                                    <img id="custom_actionsDegreeImg" src="diagrams/orphans/custom_actions.1degree.png" usemap="#custom_actions" style="max-width:100%;" border="0" align="top">
+                                </div>
+                                <div class="item">
+                                    <img id="custom_valuesDegreeImg" src="diagrams/orphans/custom_values.1degree.png" usemap="#custom_values" style="max-width:100%;" border="0" align="top">
+                                </div>
+                                <div class="item">
+                                    <img id="design_colorsDegreeImg" src="diagrams/orphans/design_colors.1degree.png" usemap="#design_colors" style="max-width:100%;" border="0" align="top">
+                                </div>
+                                <div class="item">
+                                    <img id="ldap_groups_membershipsDegreeImg" src="diagrams/orphans/ldap_groups_memberships.1degree.png" usemap="#ldap_groups_memberships" style="max-width:100%;" border="0" align="top">
+                                </div>
+                                <div class="item">
+                                    <img id="membersDegreeImg" src="diagrams/orphans/members.1degree.png" usemap="#members" style="max-width:100%;" border="0" align="top">
+                                </div>
+                                <div class="item">
+                                    <img id="plaintext_tokensDegreeImg" src="diagrams/orphans/plaintext_tokens.1degree.png" usemap="#plaintext_tokens" style="max-width:100%;" border="0" align="top">
+                                </div>
+                                <div class="item">
+                                    <img id="principal_rolesDegreeImg" src="diagrams/orphans/principal_roles.1degree.png" usemap="#principal_roles" style="max-width:100%;" border="0" align="top">
+                                </div>
+                                <div class="item">
+                                    <img id="role_permissionsDegreeImg" src="diagrams/orphans/role_permissions.1degree.png" usemap="#role_permissions" style="max-width:100%;" border="0" align="top">
+                                </div>
+                                <div class="item">
+                                    <img id="user_preferencesDegreeImg" src="diagrams/orphans/user_preferences.1degree.png" usemap="#user_preferences" style="max-width:100%;" border="0" align="top">
+                                </div>
+                                <div class="item">
+                                    <img id="wiki_content_journalsDegreeImg" src="diagrams/orphans/wiki_content_journals.1degree.png" usemap="#wiki_content_journals" style="max-width:100%;" border="0" align="top">
+                                </div>
+                                <div class="item">
+                                    <img id="wiki_redirectsDegreeImg" src="diagrams/orphans/wiki_redirects.1degree.png" usemap="#wiki_redirects" style="max-width:100%;" border="0" align="top">
+                                </div>
+                                <div class="item">
+                                    <img id="announcementsDegreeImg" src="diagrams/orphans/announcements.1degree.png" usemap="#announcements" style="max-width:100%;" border="0" align="top">
+                                </div>
+                                <div class="item">
+                                    <img id="attribute_help_textsDegreeImg" src="diagrams/orphans/attribute_help_texts.1degree.png" usemap="#attribute_help_texts" style="max-width:100%;" border="0" align="top">
+                                </div>
+                                <div class="item">
+                                    <img id="categoriesDegreeImg" src="diagrams/orphans/categories.1degree.png" usemap="#categories" style="max-width:100%;" border="0" align="top">
+                                </div>
+                                <div class="item">
+                                    <img id="cost_typesDegreeImg" src="diagrams/orphans/cost_types.1degree.png" usemap="#cost_types" style="max-width:100%;" border="0" align="top">
+                                </div>
+                                <div class="item">
+                                    <img id="custom_stylesDegreeImg" src="diagrams/orphans/custom_styles.1degree.png" usemap="#custom_styles" style="max-width:100%;" border="0" align="top">
+                                </div>
+                                <div class="item">
+                                    <img id="documentsDegreeImg" src="diagrams/orphans/documents.1degree.png" usemap="#documents" style="max-width:100%;" border="0" align="top">
+                                </div>
+                                <div class="item">
+                                    <img id="labor_budget_itemsDegreeImg" src="diagrams/orphans/labor_budget_items.1degree.png" usemap="#labor_budget_items" style="max-width:100%;" border="0" align="top">
+                                </div>
+                                <div class="item">
+                                    <img id="ldap_groups_synchronized_groupsDegreeImg" src="diagrams/orphans/ldap_groups_synchronized_groups.1degree.png" usemap="#ldap_groups_synchronized_groups" style="max-width:100%;" border="0" align="top">
+                                </div>
+                                <div class="item">
+                                    <img id="material_budget_itemsDegreeImg" src="diagrams/orphans/material_budget_items.1degree.png" usemap="#material_budget_items" style="max-width:100%;" border="0" align="top">
+                                </div>
+                                <div class="item">
+                                    <img id="meeting_content_journalsDegreeImg" src="diagrams/orphans/meeting_content_journals.1degree.png" usemap="#meeting_content_journals" style="max-width:100%;" border="0" align="top">
+                                </div>
+                                <div class="item">
+                                    <img id="project_associationsDegreeImg" src="diagrams/orphans/project_associations.1degree.png" usemap="#project_associations" style="max-width:100%;" border="0" align="top">
+                                </div>
+                                <div class="item">
+                                    <img id="rolesDegreeImg" src="diagrams/orphans/roles.1degree.png" usemap="#roles" style="max-width:100%;" border="0" align="top">
+                                </div>
+                                <div class="item">
+                                    <img id="sessionsDegreeImg" src="diagrams/orphans/sessions.1degree.png" usemap="#sessions" style="max-width:100%;" border="0" align="top">
+                                </div>
+                                <div class="item">
+                                    <img id="tokensDegreeImg" src="diagrams/orphans/tokens.1degree.png" usemap="#tokens" style="max-width:100%;" border="0" align="top">
+                                </div>
+                                <div class="item">
+                                    <img id="version_settingsDegreeImg" src="diagrams/orphans/version_settings.1degree.png" usemap="#version_settings" style="max-width:100%;" border="0" align="top">
+                                </div>
+                                <div class="item">
+                                    <img id="wiki_contentsDegreeImg" src="diagrams/orphans/wiki_contents.1degree.png" usemap="#wiki_contents" style="max-width:100%;" border="0" align="top">
+                                </div>
+                                <div class="item">
+                                    <img id="wikisDegreeImg" src="diagrams/orphans/wikis.1degree.png" usemap="#wikis" style="max-width:100%;" border="0" align="top">
+                                </div>
+                                <div class="item">
+                                    <img id="commentsDegreeImg" src="diagrams/orphans/comments.1degree.png" usemap="#comments" style="max-width:100%;" border="0" align="top">
+                                </div>
+                                <div class="item">
+                                    <img id="custom_optionsDegreeImg" src="diagrams/orphans/custom_options.1degree.png" usemap="#custom_options" style="max-width:100%;" border="0" align="top">
+                                </div>
+                                <div class="item">
+                                    <img id="document_journalsDegreeImg" src="diagrams/orphans/document_journals.1degree.png" usemap="#document_journals" style="max-width:100%;" border="0" align="top">
+                                </div>
+                                <div class="item">
+                                    <img id="menu_itemsDegreeImg" src="diagrams/orphans/menu_items.1degree.png" usemap="#menu_items" style="max-width:100%;" border="0" align="top">
+                                </div>
+                                <div class="item">
+                                    <img id="my_projects_overviewsDegreeImg" src="diagrams/orphans/my_projects_overviews.1degree.png" usemap="#my_projects_overviews" style="max-width:100%;" border="0" align="top">
+                                </div>
+                                <div class="item">
+                                    <img id="ratesDegreeImg" src="diagrams/orphans/rates.1degree.png" usemap="#rates" style="max-width:100%;" border="0" align="top">
+                                </div>
+                                <div class="item">
+                                    <img id="user_passwordsDegreeImg" src="diagrams/orphans/user_passwords.1degree.png" usemap="#user_passwords" style="max-width:100%;" border="0" align="top">
+                                </div>
+                                <div class="item">
+                                    <img id="workflowsDegreeImg" src="diagrams/orphans/workflows.1degree.png" usemap="#workflows" style="max-width:100%;" border="0" align="top">
+                                </div>
+                                <div class="item">
+                                    <img id="changesDegreeImg" src="diagrams/orphans/changes.1degree.png" usemap="#changes" style="max-width:100%;" border="0" align="top">
+                                </div>
+                                <div class="item">
+                                    <img id="cost_object_journalsDegreeImg" src="diagrams/orphans/cost_object_journals.1degree.png" usemap="#cost_object_journals" style="max-width:100%;" border="0" align="top">
+                                </div>
+                                <div class="item">
+                                    <img id="cost_queriesDegreeImg" src="diagrams/orphans/cost_queries.1degree.png" usemap="#cost_queries" style="max-width:100%;" border="0" align="top">
+                                </div>
+                                <div class="item">
+                                    <img id="export_card_configurationsDegreeImg" src="diagrams/orphans/export_card_configurations.1degree.png" usemap="#export_card_configurations" style="max-width:100%;" border="0" align="top">
+                                </div>
+                                <div class="item">
+                                    <img id="forumsDegreeImg" src="diagrams/orphans/forums.1degree.png" usemap="#forums" style="max-width:100%;" border="0" align="top">
+                                </div>
+                                <div class="item">
+                                    <img id="grid_widgetsDegreeImg" src="diagrams/orphans/grid_widgets.1degree.png" usemap="#grid_widgets" style="max-width:100%;" border="0" align="top">
+                                </div>
+                                <div class="item">
+                                    <img id="journalsDegreeImg" src="diagrams/orphans/journals.1degree.png" usemap="#journals" style="max-width:100%;" border="0" align="top">
+                                </div>
+                                <div class="item">
+                                    <img id="meeting_journalsDegreeImg" src="diagrams/orphans/meeting_journals.1degree.png" usemap="#meeting_journals" style="max-width:100%;" border="0" align="top">
+                                </div>
+                                <div class="item">
+                                    <img id="newsDegreeImg" src="diagrams/orphans/news.1degree.png" usemap="#news" style="max-width:100%;" border="0" align="top">
+                                </div>
+                                <div class="item">
+                                    <img id="news_journalsDegreeImg" src="diagrams/orphans/news_journals.1degree.png" usemap="#news_journals" style="max-width:100%;" border="0" align="top">
+                                </div>
+                                <div class="item">
+                                    <img id="wiki_pagesDegreeImg" src="diagrams/orphans/wiki_pages.1degree.png" usemap="#wiki_pages" style="max-width:100%;" border="0" align="top">
+                                </div>
+                                <div class="item">
+                                    <img id="changesetsDegreeImg" src="diagrams/orphans/changesets.1degree.png" usemap="#changesets" style="max-width:100%;" border="0" align="top">
+                                </div>
+                                <div class="item">
+                                    <img id="cost_objectsDegreeImg" src="diagrams/orphans/cost_objects.1degree.png" usemap="#cost_objects" style="max-width:100%;" border="0" align="top">
+                                </div>
+                                <div class="item">
+                                    <img id="meeting_contentsDegreeImg" src="diagrams/orphans/meeting_contents.1degree.png" usemap="#meeting_contents" style="max-width:100%;" border="0" align="top">
+                                </div>
+                                <div class="item">
+                                    <img id="meeting_participantsDegreeImg" src="diagrams/orphans/meeting_participants.1degree.png" usemap="#meeting_participants" style="max-width:100%;" border="0" align="top">
+                                </div>
+                                <div class="item">
+                                    <img id="meetingsDegreeImg" src="diagrams/orphans/meetings.1degree.png" usemap="#meetings" style="max-width:100%;" border="0" align="top">
+                                </div>
+                                <div class="item">
+                                    <img id="changeset_journalsDegreeImg" src="diagrams/orphans/changeset_journals.1degree.png" usemap="#changeset_journals" style="max-width:100%;" border="0" align="top">
+                                </div>
+                                <div class="item">
+                                    <img id="gridsDegreeImg" src="diagrams/orphans/grids.1degree.png" usemap="#grids" style="max-width:100%;" border="0" align="top">
+                                </div>
+                                <div class="item">
+                                    <img id="statusesDegreeImg" src="diagrams/orphans/statuses.1degree.png" usemap="#statuses" style="max-width:100%;" border="0" align="top">
+                                </div>
+                                <div class="item">
+                                    <img id="enumerationsDegreeImg" src="diagrams/orphans/enumerations.1degree.png" usemap="#enumerations" style="max-width:100%;" border="0" align="top">
+                                </div>
+                                <div class="item">
+                                    <img id="message_journalsDegreeImg" src="diagrams/orphans/message_journals.1degree.png" usemap="#message_journals" style="max-width:100%;" border="0" align="top">
+                                </div>
+                                <div class="item">
+                                    <img id="versionsDegreeImg" src="diagrams/orphans/versions.1degree.png" usemap="#versions" style="max-width:100%;" border="0" align="top">
+                                </div>
+                                <div class="item">
+                                    <img id="attachment_journalsDegreeImg" src="diagrams/orphans/attachment_journals.1degree.png" usemap="#attachment_journals" style="max-width:100%;" border="0" align="top">
+                                </div>
+                                <div class="item">
+                                    <img id="delayed_jobsDegreeImg" src="diagrams/orphans/delayed_jobs.1degree.png" usemap="#delayed_jobs" style="max-width:100%;" border="0" align="top">
+                                </div>
+                                <div class="item">
+                                    <img id="repositoriesDegreeImg" src="diagrams/orphans/repositories.1degree.png" usemap="#repositories" style="max-width:100%;" border="0" align="top">
+                                </div>
+                                <div class="item">
+                                    <img id="typesDegreeImg" src="diagrams/orphans/types.1degree.png" usemap="#types" style="max-width:100%;" border="0" align="top">
+                                </div>
+                                <div class="item">
+                                    <img id="messagesDegreeImg" src="diagrams/orphans/messages.1degree.png" usemap="#messages" style="max-width:100%;" border="0" align="top">
+                                </div>
+                                <div class="item">
+                                    <img id="relationsDegreeImg" src="diagrams/orphans/relations.1degree.png" usemap="#relations" style="max-width:100%;" border="0" align="top">
+                                </div>
+                                <div class="item">
+                                    <img id="databasechangelogDegreeImg" src="diagrams/orphans/databasechangelog.1degree.png" usemap="#databasechangelog" style="max-width:100%;" border="0" align="top">
+                                </div>
+                                <div class="item">
+                                    <img id="time_entry_journalsDegreeImg" src="diagrams/orphans/time_entry_journals.1degree.png" usemap="#time_entry_journals" style="max-width:100%;" border="0" align="top">
+                                </div>
+                                <div class="item">
+                                    <img id="time_entriesDegreeImg" src="diagrams/orphans/time_entries.1degree.png" usemap="#time_entries" style="max-width:100%;" border="0" align="top">
+                                </div>
+                                <div class="item">
+                                    <img id="attachmentsDegreeImg" src="diagrams/orphans/attachments.1degree.png" usemap="#attachments" style="max-width:100%;" border="0" align="top">
+                                </div>
+                                <div class="item">
+                                    <img id="auth_sourcesDegreeImg" src="diagrams/orphans/auth_sources.1degree.png" usemap="#auth_sources" style="max-width:100%;" border="0" align="top">
+                                </div>
+                                <div class="item">
+                                    <img id="cost_entriesDegreeImg" src="diagrams/orphans/cost_entries.1degree.png" usemap="#cost_entries" style="max-width:100%;" border="0" align="top">
+                                </div>
+                                <div class="item">
+                                    <img id="custom_fieldsDegreeImg" src="diagrams/orphans/custom_fields.1degree.png" usemap="#custom_fields" style="max-width:100%;" border="0" align="top">
+                                </div>
+                                <div class="item">
+                                    <img id="work_package_journalsDegreeImg" src="diagrams/orphans/work_package_journals.1degree.png" usemap="#work_package_journals" style="max-width:100%;" border="0" align="top">
+                                </div>
+                            </div>
+                            <map id="schema_migrations" name="schema_migrations">
+<area shape="rect" id="node1" href="tables/schema_migrations.html" target="_top" title="schema_migrations" alt="" coords="5,5,355,104">
+</map><map id="changesets_work_packages" name="changesets_work_packages">
+<area shape="rect" id="node1" href="tables/changesets_work_packages.html" target="_top" title="changesets_work_packages" alt="" coords="5,5,332,133">
+</map><map id="custom_fields_projects" name="custom_fields_projects">
+<area shape="rect" id="node1" href="tables/custom_fields_projects.html" target="_top" title="custom_fields_projects" alt="" coords="5,5,295,133">
+</map><map id="custom_fields_types" name="custom_fields_types">
+<area shape="rect" id="node1" href="tables/custom_fields_types.html" target="_top" title="custom_fields_types" alt="" coords="5,5,273,133">
+</map><map id="done_statuses_for_project" name="done_statuses_for_project">
+<area shape="rect" id="node1" href="tables/done_statuses_for_project.html" target="_top" title="done_statuses_for_project" alt="" coords="5,5,320,133">
+</map><map id="group_users" name="group_users">
+<area shape="rect" id="node1" href="tables/group_users.html" target="_top" title="group_users" alt="" coords="5,5,212,133">
+</map><map id="projects_types" name="projects_types">
+<area shape="rect" id="node1" href="tables/projects_types.html" target="_top" title="projects_types" alt="" coords="5,5,228,133">
+</map><map id="custom_actions_projects" name="custom_actions_projects">
+<area shape="rect" id="node1" href="tables/custom_actions_projects.html" target="_top" title="custom_actions_projects" alt="" coords="5,5,320,163">
+</map><map id="custom_actions_roles" name="custom_actions_roles">
+<area shape="rect" id="node1" href="tables/custom_actions_roles.html" target="_top" title="custom_actions_roles" alt="" coords="5,5,296,163">
+</map><map id="custom_actions_statuses" name="custom_actions_statuses">
+<area shape="rect" id="node1" href="tables/custom_actions_statuses.html" target="_top" title="custom_actions_statuses" alt="" coords="5,5,323,163">
+</map><map id="custom_actions_types" name="custom_actions_types">
+<area shape="rect" id="node1" href="tables/custom_actions_types.html" target="_top" title="custom_actions_types" alt="" coords="5,5,300,163">
+</map><map id="enabled_modules" name="enabled_modules">
+<area shape="rect" id="node1" href="tables/enabled_modules.html" target="_top" title="enabled_modules" alt="" coords="5,5,340,163">
+</map><map id="ar_internal_metadata" name="ar_internal_metadata">
+<area shape="rect" id="node1" href="tables/ar_internal_metadata.html" target="_top" title="ar_internal_metadata" alt="" coords="5,5,365,192">
+</map><map id="attachable_journals" name="attachable_journals">
+<area shape="rect" id="node1" href="tables/attachable_journals.html" target="_top" title="attachable_journals" alt="" coords="5,5,355,192">
+</map><map id="customizable_journals" name="customizable_journals">
+<area shape="rect" id="node1" href="tables/customizable_journals.html" target="_top" title="customizable_journals" alt="" coords="5,5,352,192">
+</map><map id="databasechangeloglock" name="databasechangeloglock">
+<area shape="rect" id="node1" href="tables/databasechangeloglock.html" target="_top" title="databasechangeloglock" alt="" coords="5,5,355,192">
+</map><map id="enterprise_tokens" name="enterprise_tokens">
+<area shape="rect" id="node1" href="tables/enterprise_tokens.html" target="_top" title="enterprise_tokens" alt="" coords="5,5,317,192">
+</map><map id="member_roles" name="member_roles">
+<area shape="rect" id="node1" href="tables/member_roles.html" target="_top" title="member_roles" alt="" coords="5,5,240,192">
+</map><map id="settings" name="settings">
+<area shape="rect" id="node1" href="tables/settings.html" target="_top" title="settings" alt="" coords="5,5,295,192">
+</map><map id="watchers" name="watchers">
+<area shape="rect" id="node1" href="tables/watchers.html" target="_top" title="watchers" alt="" coords="5,5,324,192">
+</map><map id="colors" name="colors">
+<area shape="rect" id="node1" href="tables/colors.html" target="_top" title="colors" alt="" coords="5,5,291,221">
+</map><map id="custom_actions" name="custom_actions">
+<area shape="rect" id="node1" href="tables/custom_actions.html" target="_top" title="custom_actions" alt="" coords="5,5,327,221">
+</map><map id="custom_values" name="custom_values">
+<area shape="rect" id="node1" href="tables/custom_values.html" target="_top" title="custom_values" alt="" coords="5,5,309,221">
+</map><map id="design_colors" name="design_colors">
+<area shape="rect" id="node1" href="tables/design_colors.html" target="_top" title="design_colors" alt="" coords="5,5,313,221">
+</map><map id="ldap_groups_memberships" name="ldap_groups_memberships">
+<area shape="rect" id="node1" href="tables/ldap_groups_memberships.html" target="_top" title="ldap_groups_memberships" alt="" coords="5,5,381,221">
+</map><map id="members" name="members">
+<area shape="rect" id="node1" href="tables/members.html" target="_top" title="members" alt="" coords="5,5,300,221">
+</map><map id="plaintext_tokens" name="plaintext_tokens">
+<area shape="rect" id="node1" href="tables/plaintext_tokens.html" target="_top" title="plaintext_tokens" alt="" coords="5,5,299,221">
+</map><map id="principal_roles" name="principal_roles">
+<area shape="rect" id="node1" href="tables/principal_roles.html" target="_top" title="principal_roles" alt="" coords="5,5,287,221">
+</map><map id="role_permissions" name="role_permissions">
+<area shape="rect" id="node1" href="tables/role_permissions.html" target="_top" title="role_permissions" alt="" coords="5,5,337,221">
+</map><map id="user_preferences" name="user_preferences">
+<area shape="rect" id="node1" href="tables/user_preferences.html" target="_top" title="user_preferences" alt="" coords="5,5,339,221">
+</map><map id="wiki_content_journals" name="wiki_content_journals">
+<area shape="rect" id="node1" href="tables/wiki_content_journals.html" target="_top" title="wiki_content_journals" alt="" coords="5,5,348,221">
+</map><map id="wiki_redirects" name="wiki_redirects">
+<area shape="rect" id="node1" href="tables/wiki_redirects.html" target="_top" title="wiki_redirects" alt="" coords="5,5,312,221">
+</map><map id="announcements" name="announcements">
+<area shape="rect" id="node1" href="tables/announcements.html" target="_top" title="announcements" alt="" coords="5,5,303,251">
+</map><map id="attribute_help_texts" name="attribute_help_texts">
+<area shape="rect" id="node1" href="tables/attribute_help_texts.html" target="_top" title="attribute_help_texts" alt="" coords="5,5,357,251">
+</map><map id="categories" name="categories">
+<area shape="rect" id="node1" href="tables/categories.html" target="_top" title="categories" alt="" coords="5,5,289,251">
+</map><map id="cost_types" name="cost_types">
+<area shape="rect" id="node1" href="tables/cost_types.html" target="_top" title="cost_types" alt="" coords="5,5,288,251">
+</map><map id="custom_styles" name="custom_styles">
+<area shape="rect" id="node1" href="tables/custom_styles.html" target="_top" title="custom_styles" alt="" coords="5,5,316,251">
+</map><map id="documents" name="documents">
+<area shape="rect" id="node1" href="tables/documents.html" target="_top" title="documents" alt="" coords="5,5,269,251">
+</map><map id="labor_budget_items" name="labor_budget_items">
+<area shape="rect" id="node1" href="tables/labor_budget_items.html" target="_top" title="labor_budget_items" alt="" coords="5,5,357,251">
+</map><map id="ldap_groups_synchronized_groups" name="ldap_groups_synchronized_groups">
+<area shape="rect" id="node1" href="tables/ldap_groups_synchronized_groups.html" target="_top" title="ldap_groups_synchronized_groups" alt="" coords="5,5,476,251">
+</map><map id="material_budget_items" name="material_budget_items">
+<area shape="rect" id="node1" href="tables/material_budget_items.html" target="_top" title="material_budget_items" alt="" coords="5,5,379,251">
+</map><map id="meeting_content_journals" name="meeting_content_journals">
+<area shape="rect" id="node1" href="tables/meeting_content_journals.html" target="_top" title="meeting_content_journals" alt="" coords="5,5,379,251">
+</map><map id="project_associations" name="project_associations">
+<area shape="rect" id="node1" href="tables/project_associations.html" target="_top" title="project_associations" alt="" coords="5,5,339,251">
+</map><map id="roles" name="roles">
+<area shape="rect" id="node1" href="tables/roles.html" target="_top" title="roles" alt="" coords="5,5,224,251">
+</map><map id="sessions" name="sessions">
+<area shape="rect" id="node1" href="tables/sessions.html" target="_top" title="sessions" alt="" coords="5,5,291,251">
+</map><map id="tokens" name="tokens">
+<area shape="rect" id="node1" href="tables/tokens.html" target="_top" title="tokens" alt="" coords="5,5,291,251">
+</map><map id="version_settings" name="version_settings">
+<area shape="rect" id="node1" href="tables/version_settings.html" target="_top" title="version_settings" alt="" coords="5,5,300,251">
+</map><map id="wiki_contents" name="wiki_contents">
+<area shape="rect" id="node1" href="tables/wiki_contents.html" target="_top" title="wiki_contents" alt="" coords="5,5,285,251">
+</map><map id="wikis" name="wikis">
+<area shape="rect" id="node1" href="tables/wikis.html" target="_top" title="wikis" alt="" coords="5,5,291,251">
+</map><map id="comments" name="comments">
+<area shape="rect" id="node1" href="tables/comments.html" target="_top" title="comments" alt="" coords="5,5,311,280">
+</map><map id="custom_options" name="custom_options">
+<area shape="rect" id="node1" href="tables/custom_options.html" target="_top" title="custom_options" alt="" coords="5,5,303,280">
+</map><map id="document_journals" name="document_journals">
+<area shape="rect" id="node1" href="tables/document_journals.html" target="_top" title="document_journals" alt="" coords="5,5,327,280">
+</map><map id="menu_items" name="menu_items">
+<area shape="rect" id="node1" href="tables/menu_items.html" target="_top" title="menu_items" alt="" coords="5,5,316,280">
+</map><map id="my_projects_overviews" name="my_projects_overviews">
+<area shape="rect" id="node1" href="tables/my_projects_overviews.html" target="_top" title="my_projects_overviews" alt="" coords="5,5,360,280">
+</map><map id="rates" name="rates">
+<area shape="rect" id="node1" href="tables/rates.html" target="_top" title="rates" alt="" coords="5,5,303,280">
+</map><map id="user_passwords" name="user_passwords">
+<area shape="rect" id="node1" href="tables/user_passwords.html" target="_top" title="user_passwords" alt="" coords="5,5,344,280">
+</map><map id="workflows" name="workflows">
+<area shape="rect" id="node1" href="tables/workflows.html" target="_top" title="workflows" alt="" coords="5,5,237,280">
+</map><map id="changes" name="changes">
+<area shape="rect" id="node1" href="tables/changes.html" target="_top" title="changes" alt="" coords="5,5,311,309">
+</map><map id="cost_object_journals" name="cost_object_journals">
+<area shape="rect" id="node1" href="tables/cost_object_journals.html" target="_top" title="cost_object_journals" alt="" coords="5,5,365,309">
+</map><map id="cost_queries" name="cost_queries">
+<area shape="rect" id="node1" href="tables/cost_queries.html" target="_top" title="cost_queries" alt="" coords="5,5,304,309">
+</map><map id="export_card_configurations" name="export_card_configurations">
+<area shape="rect" id="node1" href="tables/export_card_configurations.html" target="_top" title="export_card_configurations" alt="" coords="5,5,416,309">
+</map><map id="forums" name="forums">
+<area shape="rect" id="node1" href="tables/forums.html" target="_top" title="forums" alt="" coords="5,5,335,309">
+</map><map id="grid_widgets" name="grid_widgets">
+<area shape="rect" id="node1" href="tables/grid_widgets.html" target="_top" title="grid_widgets" alt="" coords="5,5,305,309">
+</map><map id="journals" name="journals">
+<area shape="rect" id="node1" href="tables/journals.html" target="_top" title="journals" alt="" coords="5,5,319,309">
+</map><map id="meeting_journals" name="meeting_journals">
+<area shape="rect" id="node1" href="tables/meeting_journals.html" target="_top" title="meeting_journals" alt="" coords="5,5,337,309">
+</map><map id="news" name="news">
+<area shape="rect" id="node1" href="tables/news.html" target="_top" title="news" alt="" coords="5,5,337,309">
+</map><map id="news_journals" name="news_journals">
+<area shape="rect" id="node1" href="tables/news_journals.html" target="_top" title="news_journals" alt="" coords="5,5,337,309">
+</map><map id="wiki_pages" name="wiki_pages">
+<area shape="rect" id="node1" href="tables/wiki_pages.html" target="_top" title="wiki_pages" alt="" coords="5,5,291,309">
+</map><map id="changesets" name="changesets">
+<area shape="rect" id="node1" href="tables/changesets.html" target="_top" title="changesets" alt="" coords="5,5,315,339">
+</map><map id="cost_objects" name="cost_objects">
+<area shape="rect" id="node1" href="tables/cost_objects.html" target="_top" title="cost_objects" alt="" coords="5,5,303,339">
+</map><map id="meeting_contents" name="meeting_contents">
+<area shape="rect" id="node1" href="tables/meeting_contents.html" target="_top" title="meeting_contents" alt="" coords="5,5,341,339">
+</map><map id="meeting_participants" name="meeting_participants">
+<area shape="rect" id="node1" href="tables/meeting_participants.html" target="_top" title="meeting_participants" alt="" coords="5,5,365,339">
+</map><map id="meetings" name="meetings">
+<area shape="rect" id="node1" href="tables/meetings.html" target="_top" title="meetings" alt="" coords="5,5,291,339">
+</map><map id="changeset_journals" name="changeset_journals">
+<area shape="rect" id="node1" href="tables/changeset_journals.html" target="_top" title="changeset_journals" alt="" coords="5,5,355,368">
+</map><map id="grids" name="grids">
+<area shape="rect" id="node1" href="tables/grids.html" target="_top" title="grids" alt="" coords="5,5,315,368">
+</map><map id="statuses" name="statuses">
+<area shape="rect" id="node1" href="tables/statuses.html" target="_top" title="statuses" alt="" coords="5,5,316,368">
+</map><map id="enumerations" name="enumerations">
+<area shape="rect" id="node1" href="tables/enumerations.html" target="_top" title="enumerations" alt="" coords="5,5,309,397">
+</map><map id="message_journals" name="message_journals">
+<area shape="rect" id="node1" href="tables/message_journals.html" target="_top" title="message_journals" alt="" coords="5,5,344,397">
+</map><map id="versions" name="versions">
+<area shape="rect" id="node1" href="tables/versions.html" target="_top" title="versions" alt="" coords="5,5,319,397">
+</map><map id="attachment_journals" name="attachment_journals">
+<area shape="rect" id="node1" href="tables/attachment_journals.html" target="_top" title="attachment_journals" alt="" coords="5,5,361,427">
+</map><map id="delayed_jobs" name="delayed_jobs">
+<area shape="rect" id="node1" href="tables/delayed_jobs.html" target="_top" title="delayed_jobs" alt="" coords="5,5,307,427">
+</map><map id="repositories" name="repositories">
+<area shape="rect" id="node1" href="tables/repositories.html" target="_top" title="repositories" alt="" coords="5,5,387,427">
+</map><map id="types" name="types">
+<area shape="rect" id="node1" href="tables/types.html" target="_top" title="types" alt="" coords="5,5,332,427">
+</map><map id="messages" name="messages">
+<area shape="rect" id="node1" href="tables/messages.html" target="_top" title="messages" alt="" coords="5,5,309,456">
+</map><map id="relations" name="relations">
+<area shape="rect" id="node1" href="tables/relations.html" target="_top" title="relations" alt="" coords="5,5,265,456">
+</map><map id="databasechangelog" name="databasechangelog">
+<area shape="rect" id="node1" href="tables/databasechangelog.html" target="_top" title="databasechangelog" alt="" coords="5,5,323,485">
+</map><map id="time_entry_journals" name="time_entry_journals">
+<area shape="rect" id="node1" href="tables/time_entry_journals.html" target="_top" title="time_entry_journals" alt="" coords="5,5,357,515">
+</map><map id="time_entries" name="time_entries">
+<area shape="rect" id="node1" href="tables/time_entries.html" target="_top" title="time_entries" alt="" coords="5,5,339,544">
+</map><map id="attachments" name="attachments">
+<area shape="rect" id="node1" href="tables/attachments.html" target="_top" title="attachments" alt="" coords="5,5,323,573">
+</map><map id="auth_sources" name="auth_sources">
+<area shape="rect" id="node1" href="tables/auth_sources.html" target="_top" title="auth_sources" alt="" coords="5,5,349,573">
+</map><map id="cost_entries" name="cost_entries">
+<area shape="rect" id="node1" href="tables/cost_entries.html" target="_top" title="cost_entries" alt="" coords="5,5,339,573">
+</map><map id="custom_fields" name="custom_fields">
+<area shape="rect" id="node1" href="tables/custom_fields.html" target="_top" title="custom_fields" alt="" coords="5,5,312,603">
+</map><map id="work_package_journals" name="work_package_journals">
+<area shape="rect" id="node1" href="tables/work_package_journals.html" target="_top" title="work_package_journals" alt="" coords="5,5,387,691">
+</map>
+                        </div>
+                    </div>
+                </section>
+            </div>
+            <!-- /.content-wrapper -->
+            <footer class="main-footer">
+                <div>
+                    <div class="pull-right hidden-xs">
+                        <a href="https://github.com/schemaspy/schemaspy" title="GitHub for SchemaSpy"><i class="fa fa-github-square fa-2x"></i></a>
+                        <a href="http://stackoverflow.com/questions/tagged/schemaspy" title="StackOverflow for SchemaSpy"><i class="fa fa-stack-overflow fa-2x"></i></a>
+                    </div>
+                    <strong>Generated by <a href="http://schemaspy.org/" class="logo-text"><i class="fa fa-database"></i> SchemaSpy 6.1.0</a></strong>
+                </div>
+                <!-- /.container -->
+            </footer>
+        </div>
+        <!-- ./wrapper -->
+
+        <!-- jQuery 2.2.3 -->
+        <script src="bower/admin-lte/plugins/jQuery/jquery-2.2.3.min.js"></script>
+        <script src="bower/admin-lte/plugins/jQueryUI/jquery-ui.min.js"></script>
+        <!-- Bootstrap 3.3.5 -->
+        <script src="bower/admin-lte/bootstrap/js/bootstrap.min.js"></script>
+        <!-- DataTables -->
+        <script src="bower/datatables.net/jquery.dataTables.min.js"></script>
+        <script src="bower/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+        <script src="bower/datatables.net-buttons/dataTables.buttons.min.js"></script>
+        <script src="bower/datatables.net-buttons-bs/js/buttons.bootstrap.min.js"></script>
+        <script src="bower/datatables.net-buttons/buttons.html5.min.js"></script>
+        <script src="bower/datatables.net-buttons/buttons.print.min.js"></script>
+        <script src="bower/datatables.net-buttons/buttons.colVis.min.js"></script>
+        <!-- SheetJS -->
+        <script src="bower/js-xlsx/xlsx.full.min.js"></script>
+        <!-- pdfmake -->
+        <script src="bower/pdfmake/pdfmake.min.js"></script>
+        <script src="bower/pdfmake/vfs_fonts.js"></script>
+        <!-- SlimScroll -->
+        <script src="bower/admin-lte/plugins/slimScroll/jquery.slimscroll.min.js"></script>
+        <!-- FastClick -->
+        <script src="bower/admin-lte/plugins/fastclick/fastclick.js"></script>
+        <!-- Salvattore -->
+        <script src="bower/salvattore/salvattore.min.js"></script>
+        <!-- AnchorJS -->
+        <script src="bower/anchor-js/anchor.min.js"></script>
+        <!-- CodeMirror -->
+        <script src="bower/codemirror/codemirror.js"></script>
+        <script src="bower/codemirror/sql.js"></script>
+        <!-- AdminLTE App -->
+        <script src="bower/admin-lte/dist/js/app.min.js"></script>
+        <script src=""></script>
+        <script src="schemaSpy.js"></script>
+    </body>
+</html>

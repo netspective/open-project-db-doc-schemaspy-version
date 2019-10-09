@@ -42,6 +42,8 @@ custom_options
 custom_styles
 custom_values
 customizable_journals
+databasechangelog
+databasechangeloglock
 delayed_jobs
 design_colors
 document_journals

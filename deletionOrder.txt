@@ -58,6 +58,8 @@ documents
 document_journals
 design_colors
 delayed_jobs
+databasechangeloglock
+databasechangelog
 customizable_journals
 custom_values
 custom_styles
